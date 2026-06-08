@@ -10,6 +10,10 @@ import SwiftData
 
 @main
 struct OpenBusSPApp: App {
+    init() {
+        try? SPTransTokenVault.shared.bootstrapIfNeeded()
+    }
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,

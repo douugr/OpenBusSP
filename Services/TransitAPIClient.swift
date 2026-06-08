@@ -33,6 +33,8 @@ enum TransitAPIError: Error, LocalizedError, Equatable {
 }
 
 final class TransitAPIClient {
+    static let defaultBaseURL = URL(string: "https://api.olhovivo.sptrans.com.br/v2.1")!
+
     struct Configuration: Sendable {
         let accessToken: String
         let baseURL: URL
@@ -40,7 +42,7 @@ final class TransitAPIClient {
 
         init(
             accessToken: String,
-            baseURL: URL = URL(string: "https://api.olhovivo.sptrans.com.br/v2.1")!,
+            baseURL: URL = TransitAPIClient.defaultBaseURL,
             session: URLSession = .shared
         ) {
             self.accessToken = accessToken
@@ -60,9 +62,21 @@ final class TransitAPIClient {
 
     convenience init(
         accessToken: String,
-        baseURL: URL = URL(string: "https://api.olhovivo.sptrans.com.br/v2.1")!,
+        baseURL: URL = TransitAPIClient.defaultBaseURL,
         session: URLSession = .shared
     ) {
+        self.init(configuration: Configuration(accessToken: accessToken, baseURL: baseURL, session: session))
+    }
+
+    convenience init(
+        tokenVault: SPTransTokenVault = .shared,
+        baseURL: URL = TransitAPIClient.defaultBaseURL,
+        session: URLSession = .shared
+    ) throws {
+        guard let accessToken = try tokenVault.currentAccessToken() else {
+            throw TransitAPIError.missingAccessToken
+        }
+
         self.init(configuration: Configuration(accessToken: accessToken, baseURL: baseURL, session: session))
     }
 
