@@ -10,9 +10,7 @@ import SwiftData
 
 @main
 struct OpenBusSPApp: App {
-    init() {
-        try? SPTransTokenVault.shared.bootstrapIfNeeded()
-    }
+    @StateObject private var dependencies = AppDependencies()
 
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -30,6 +28,7 @@ struct OpenBusSPApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(dependencies)
         }
         .modelContainer(sharedModelContainer)
     }
