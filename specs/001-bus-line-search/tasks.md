@@ -32,9 +32,9 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 [P] Define the core transit entities in `Models/TransitStop.swift`, `Models/TransitLine.swift`, and `Models/StopArrival.swift`
+- [x] T004 [P] Define the core transit entities in `Models/TransitStop.swift`, `Models/TransitLine.swift`, and `Models/StopArrival.swift`
 - [ ] T005 [P] Define the transient location query state in `Models/NearbyStopQuery.swift`
-- [ ] T006 Implement the SPTrans client for line lookup, stop lookup, and arrival lookup in `Services/TransitAPIClient.swift`
+- [x] T006 Implement the SPTrans client for line lookup, stop lookup, and arrival lookup in `Services/TransitAPIClient.swift`
 - [ ] T007 [P] Implement location authorization and current-position tracking in `Services/LocationService.swift`
 - [ ] T008 Implement nearby-stop resolution and proximity filtering in `Services/NearbyStopStore.swift`
 - [ ] T009 Wire shared application state into the root view hierarchy in `OpenBusSPApp.swift` and `ContentView.swift`
